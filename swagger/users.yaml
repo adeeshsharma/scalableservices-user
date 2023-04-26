@@ -1,0 +1,29 @@
+/users:
+  get:
+    summary: Get all users and their wishlists
+    tags:
+      - Users
+    responses:
+      '200':
+        description: A list of users
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+  post:
+    summary: Create a new user
+    tags:
+      - Users
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string

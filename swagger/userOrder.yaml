@@ -1,0 +1,28 @@
+/user/{userId}/orderWishlist:
+  post:
+    summary: Create a new order with the products from a user's wishlist
+    tags:
+      - Users
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    responses:
+      '200':
+        description: The created order
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                userId:
+                  type: string
+                productIds:
+                  type: array
+                  items:
+                    type: string
