@@ -1,0 +1,100 @@
+/user/{idToGet}:
+  get:
+    summary: Get a user by ID and their wishlist
+    tags:
+      - Users
+    parameters:
+      - in: path
+        name: idToGet
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    responses:
+      '200':
+        description: A user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      '404':
+        description: User not found
+
+/user/{userIdToUpdate}:
+  put:
+    summary: Update a user by ID
+    tags:
+      - Users
+    parameters:
+      - in: path
+        name: userIdToUpdate
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+    responses:
+      '200':
+        description: The updated user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      '404':
+        description: User not found
+
+/user/{userIdToDelete}:
+  delete:
+    summary: Delete a user by ID
+    tags:
+      - Users
+    parameters:
+      - in: path
+        name: userIdToDelete
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    responses:
+      '204':
+        description: User deleted successfully
+      '404':
+        description: User not found
+
+/user/{userId}/wishlist/{productId}:
+  post:
+    summary: Add a product ID to a user's wishlist
+    tags:
+      - Users
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: The user ID
+      - in: path
+        name: productId
+        schema:
+          type: string
+        required: true
+        description: The product ID
+    responses:
+      '200':
+        description: The updated user with the added product in the wishlist
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      '404':
+        description: User or product not found

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  userservice:
+    image: userservice
+    container_name: userservice
+    networks:
+      - micronetwork
+    ports:
+      - "3001:3000"
+
+  productservice:
+    image: productservice
+    container_name: productservice
+    networks:
+      - micronetwork
+    ports:
+      - "3002:4000"
+
+  orderservice:
+    image: orderservice
+    container_name: orderservice
+    networks:
+      - micronetwork
+    ports:
+      - "3003:5001"
+      
+networks:
+  micronetwork:
+    driver: bridge

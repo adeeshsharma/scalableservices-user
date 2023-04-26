@@ -3,7 +3,24 @@ components:
     User:
       type: object
       properties:
+        _id:
+          type: string
+          readOnly: true
         name:
           type: string
         email:
           type: string
+        wishlist:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        price:
+          type: number
