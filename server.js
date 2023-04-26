@@ -105,7 +105,7 @@ app.post('/user/:userId/orderWishlist', async (req, res) => {
     const { userId } = req.params;
     const user = await User.findById(userId).populate('wishlist');
     const productIds = user.wishlist.map((product) => product._id);
-    const { data: order } = await axios.post(`http://localhost:5001/order`, {
+    const { data: order } = await axios.post(`http://orderservice:5001/order`, {
       userId,
       productIds,
     });
