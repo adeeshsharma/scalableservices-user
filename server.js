@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const connect = require('./mongodb.js');
+const swaggerInit = require('./swagger/swaggerInit.js');
 
 connect();
 
@@ -14,6 +15,8 @@ const User = mongoose.model('User', {
 const app = express();
 app.use(bodyParser.json());
 
+swaggerInit(app);
+
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find();
@@ -23,9 +26,9 @@ app.get('/users', async (req, res) => {
   }
 });
 
-app.get('/user/:id', async (req, res) => {
+app.get('/user/:idToGet', async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.params.idToGet;
     const user = await User.findById(id);
     res.json(user);
   } catch (err) {
@@ -44,9 +47,9 @@ app.post('/user', async (req, res) => {
   }
 });
 
-app.put('/user/:id', async (req, res) => {
+app.put('/user/:idToUpdate', async (req, res) => {
   try {
-    const { id } = req.params;
+    const { idToUpdate } = req.params;
     const { name, email } = req.body;
     const user = await User.findByIdAndUpdate(
       id,
@@ -59,9 +62,9 @@ app.put('/user/:id', async (req, res) => {
   }
 });
 
-app.delete('/user/:id', async (req, res) => {
+app.delete('/user/:idToDelete', async (req, res) => {
   try {
-    const { id } = req.params;
+    const { idToDelete } = req.params;
     await User.findByIdAndDelete(id);
     res.sendStatus(204);
   } catch (err) {
