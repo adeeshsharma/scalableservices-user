@@ -3,21 +3,17 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 const components = yaml.load('./swagger/components.yaml');
-const getUsers = yaml.load('./swagger/get_users.yaml');
-const getUserById = yaml.load('./swagger/get_userbyid.yaml');
-const postUser = yaml.load('./swagger/post_user.yaml');
-const putUserById = yaml.load('./swagger/put_userbyid.yaml');
-const deleteUserById = yaml.load('./swagger/delete_userbyid.yaml');
+const users = yaml.load('./swagger/users.yaml');
+const userOrder = yaml.load('./swagger/userOrder.yaml');
+const individualUser = yaml.load('./swagger/individual_user.yaml');
 
 function swaggerInit(appInstance) {
   const allSwagger = {
     ...components,
     paths: {
-      ...getUsers,
-      ...getUserById,
-      ...postUser,
-      ...putUserById,
-      ...deleteUserById,
+      ...users,
+      ...userOrder,
+      ...individualUser,
     },
   };
 
